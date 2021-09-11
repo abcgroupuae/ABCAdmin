@@ -75,8 +75,27 @@ public class Product {
 	private LocalDateTime Created_at;
 	@Column(name="updated_at")
 	private LocalDateTime Updated_at;
+	private String updated_by;
+	private String created_by;
 
 	
+	
+	public String getUpdated_by() {
+		return updated_by;
+	}
+
+	public void setUpdated_by(String updated_by) {
+		this.updated_by = updated_by;
+	}
+
+	public String getCreated_by() {
+		return created_by;
+	}
+
+	public void setCreated_by(String created_by) {
+		this.created_by = created_by;
+	}
+
 	public String getProduct_id() {
 		return Product_id;
 	}
@@ -379,6 +398,10 @@ public class Product {
 
 	
 
+
+
+
+
 	public Product(String product_id, String familyCode, int barcode, String category_ID, String sub_Category_ID,
 			String sub_Sub_Category_ID, String product_name, String shape, String colour, String size,
 			String description, String long_description, String available_sizes, String available_colours,
@@ -386,8 +409,9 @@ public class Product {
 			double outlet_diameter, String available_variance, String brand, String unit_of_measurement,
 			double unit_price, String category, String type, String application, String mainImage, String thumpnail1,
 			String thumpnail2, String thumpnail3, String thumpnail4, String thumpnail5, String thumpnail6,
-			String technicalSheet, LocalDateTime created_at, LocalDateTime updated_at, Categories categoryDetails,
-			SubCategory subCategoryDetails, SubSubCategory subSubCategoryDetails) {
+			String technicalSheet, LocalDateTime created_at, LocalDateTime updated_at, String updated_by,
+			String created_by, Categories categoryDetails, SubCategory subCategoryDetails,
+			SubSubCategory subSubCategoryDetails, String fromValue) {
 		super();
 		Product_id = product_id;
 		FamilyCode = familyCode;
@@ -426,12 +450,13 @@ public class Product {
 		TechnicalSheet = technicalSheet;
 		Created_at = created_at;
 		Updated_at = updated_at;
+		this.updated_by = updated_by;
+		this.created_by = created_by;
 		this.categoryDetails = categoryDetails;
 		this.subCategoryDetails = subCategoryDetails;
 		this.subSubCategoryDetails = subSubCategoryDetails;
+		FromValue = fromValue;
 	}
-
-
 
 	@Override
 	public String toString() {

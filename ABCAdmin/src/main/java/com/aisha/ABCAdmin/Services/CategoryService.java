@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,18 +27,36 @@ public class CategoryService {
 	}
 	
 	
-	public Categories saveCategory(Categories newCategory) {
-		
-		if(newCategory.getFromValue().equalsIgnoreCase("Add") ) {
-			newCategory.setCreated_at(LocalDateTime.now());
-			newCategory.setUpdated_at(LocalDateTime.now());
+	public Categories saveCategory(Categories newCategory,HttpSession session) {
+		System.out.println("From value"+newCategory.getFromValue());
+		newCategory.setUpdated_at(LocalDateTime.now());
+		newCategory.setUpdated_by(session.getAttribute("userId").toString());
+		if(!categoryRepository.findById(newCategory.getCategory_ID()).isPresent()) {
+			 newCategory.setCreated_at(LocalDateTime.now());
+			 newCategory.setCreated_by( session.getAttribute("userId").toString());
 		}else {
-			newCategory.setUpdated_at(LocalDateTime.now());
-			if(!categoryRepository.findById(newCategory.getCategory_ID()).isPresent())
-			    newCategory.setCreated_at(LocalDateTime.now());
-//			System.out.println(newCategory.getFromValue()+" and created at"+ newCategory.getCreated_at());
+			Categories existingCategory = categoryRepository.findById(newCategory.getCategory_ID()).get();
+			 newCategory.setCreated_at(existingCategory.getCreated_at());
+			 newCategory.setCreated_by( existingCategory.getCreated_by());
 		}
-		return categoryRepository.saveAndFlush(newCategory);
+		
+//		if(newCategory.getFromValue().equalsIgnoreCase("Add") ) {
+//			newCategory.setCreated_at(LocalDateTime.now());
+//			newCategory.setUpdated_at(LocalDateTime.now());
+//			newCategory.setCreated_by(session.getAttribute("userId").toString());
+//			newCategory.setUpdated_by(session.getAttribute("userId").toString());
+//			System.out.println("Created At"+newCategory.getCreated_at());
+//		}else {
+//			newCategory.setUpdated_at(LocalDateTime.now());
+//			newCategory.setUpdated_by(session.getAttribute("userId").toString());
+//			if(!categoryRepository.findById(newCategory.getCategory_ID()).isPresent()) {
+//				 newCategory.setCreated_at(LocalDateTime.now());
+//				 newCategory.setCreated_by( session.getAttribute("userId").toString());
+//			}
+//			   
+////			System.out.println(newCategory.getFromValue()+" and created at"+ newCategory.getCreated_at());
+//		}
+		return categoryRepository.save(newCategory);
 	}
 	
 	

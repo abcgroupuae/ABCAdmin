@@ -36,6 +36,22 @@ public class SubCategory {
 	public String Status;
 	private LocalDateTime updated_at;
 	private LocalDateTime created_at;
+	private String updated_by;
+	private String created_by;
+	
+	
+	public String getUpdated_by() {
+		return updated_by;
+	}
+	public void setUpdated_by(String updated_by) {
+		this.updated_by = updated_by;
+	}
+	public String getCreated_by() {
+		return created_by;
+	}
+	public void setCreated_by(String created_by) {
+		this.created_by = created_by;
+	}
 	public SubCategoryIdentity getSubCategoryIdentity() {
 		return subCategoryIdentity;
 	}
@@ -72,8 +88,13 @@ public class SubCategory {
 	public void setCreated_at(LocalDateTime created_at) {
 		this.created_at = created_at;
 	}
-	public SubCategory(SubCategoryIdentity subCategoryIdentity, String sub_Category_Name, String description,
-			String status, LocalDateTime updated_at, LocalDateTime created_at) {
+	
+	
+	public SubCategory(@Valid SubCategoryIdentity subCategoryIdentity,
+			@NotNull(message = " is required") String sub_Category_Name,
+			@NotNull(message = " is required") String description, @NotNull(message = " is required") String status,
+			LocalDateTime updated_at, LocalDateTime created_at, String updated_by, String created_by,
+			Categories categories, String fromValue) {
 		super();
 		this.subCategoryIdentity = subCategoryIdentity;
 		Sub_Category_Name = sub_Category_Name;
@@ -81,8 +102,11 @@ public class SubCategory {
 		Status = status;
 		this.updated_at = updated_at;
 		this.created_at = created_at;
+		this.updated_by = updated_by;
+		this.created_by = created_by;
+		this.categories = categories;
+		FromValue = fromValue;
 	}
-	
 	public SubCategory() {
 		
 	}

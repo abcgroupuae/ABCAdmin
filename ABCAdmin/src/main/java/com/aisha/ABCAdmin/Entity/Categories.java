@@ -27,6 +27,22 @@ public class Categories {
 	private String Status;
 	private LocalDateTime updated_at;
 	private LocalDateTime created_at;
+	private String updated_by;
+	private String created_by;
+	
+	
+	public String getUpdated_by() {
+		return updated_by;
+	}
+	public void setUpdated_by(String updated_by) {
+		this.updated_by = updated_by;
+	}
+	public String getCreated_by() {
+		return created_by;
+	}
+	public void setCreated_by(String created_by) {
+		this.created_by = created_by;
+	}
 	public String getCategory_ID() {
 		return Category_ID;
 	}
@@ -64,7 +80,8 @@ public class Categories {
 		this.created_at = created_at;
 	}
 	public Categories(String category_ID, String category_Name, String description, String status, LocalDateTime updated_at,
-			LocalDateTime created_at) {
+			LocalDateTime created_at,String updated_by,
+			String created_by) {
 		super();
 		Category_ID = category_ID;
 		Category_Name = category_Name;
@@ -72,6 +89,8 @@ public class Categories {
 		Status = status;
 		this.updated_at = updated_at;
 		this.created_at = created_at;
+		this.updated_by = updated_by;
+		this.created_by = created_by;
 	}
 	public Categories() {
 		

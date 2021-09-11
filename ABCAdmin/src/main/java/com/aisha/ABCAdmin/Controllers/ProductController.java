@@ -2,6 +2,8 @@ package com.aisha.ABCAdmin.Controllers;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,7 +62,7 @@ public class ProductController {
 	}
 
 	@PostMapping("/products/add")
-	public String saveProduct(@ModelAttribute Product newProduct,
+	public String saveProduct(@ModelAttribute Product newProduct,HttpSession session,
 			@RequestParam(name = "mainproductimage", required = false) MultipartFile multipartFile,
 			@RequestParam(name = "technicaldiagram", required = false) MultipartFile technical,
 			@RequestParam(name = "productthumpnail1", required = false) MultipartFile thumpnail1,
@@ -133,7 +135,7 @@ public class ProductController {
 				newProduct.setThumpnail6("");
 			}
 			System.out.println(newProduct.toString());
-			productService.saveProduct(newProduct);
+			productService.saveProduct(newProduct,session);
 
 
 		} catch (Exception ex) {

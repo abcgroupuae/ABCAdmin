@@ -1,5 +1,6 @@
 package com.aisha.ABCAdmin.Controllers;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -46,14 +47,14 @@ public class SubCategoryController {
 		return "addSubcategory";
 	}
 	@PostMapping("/subcategory/add")
-	public String postSaveCategory(@Valid @ModelAttribute SubCategory newSubCategory, BindingResult theBindingResult, Model model) {
+	public String postSaveCategory(@Valid @ModelAttribute SubCategory newSubCategory, BindingResult theBindingResult, Model model, HttpSession session) {
 		String categoryName = newSubCategory.getSub_Category_Name();
 		log.info("saving new category: " + categoryName);
 		if (theBindingResult.hasErrors()) {
             return "addSubcategory";
         }
 		log.info("After error checking" + theBindingResult);
-		subCategoryService.saveSubCategory(newSubCategory);
+		subCategoryService.saveSubCategory(newSubCategory,session);
 		log.info("Successfully created Category: " + categoryName);
 		return "redirect:/subcategory";
 	}

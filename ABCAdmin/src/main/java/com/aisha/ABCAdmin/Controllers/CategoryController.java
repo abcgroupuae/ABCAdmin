@@ -1,5 +1,6 @@
 package com.aisha.ABCAdmin.Controllers;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -46,14 +47,15 @@ public class CategoryController {
 		return "categoryadd";
 	}
 	@PostMapping("/category/add")
-	public String postSaveCategory( @Valid @ModelAttribute Categories newCategory, BindingResult theBindingResult, Model model) {
+	public String postSaveCategory(@Valid @ModelAttribute Categories newCategory, BindingResult theBindingResult, Model model,HttpSession session) {
 		String categoryId = newCategory.getCategory_ID();
 		log.info("saving new category: " + categoryId);
 		if (theBindingResult.hasErrors()) {
             return "categoryadd";
         }
 		log.info("After error checking" + theBindingResult);
-		categoryService.saveCategory(newCategory);
+		//System.out.println(newCategory);
+		categoryService.saveCategory(newCategory,session);
 		log.info("Successfully created Category: " + categoryId);
 		return "redirect:/category";
 	}
@@ -77,5 +79,5 @@ public class CategoryController {
 		
 		return "updateCategory";
 	}
-
+ 
 }
