@@ -42,19 +42,19 @@
 							    <form action="#" th:action="@{/category/add}" th:object="${categories}" method="post">
 							    <input type="hidden" th:field="*{FromValue}" th:value="Add"/>
 							    	<p>Category Id: <input type="text" th:field="*{Category_ID}" /></p>
-							    	<div th:if="${#fields.hasErrors('Category_ID')}">
+							    	<div style="color: red;" th:if="${#fields.hasErrors('Category_ID')}">
 									        <ul>
 									            <li th:each="err : ${#fields.errors('Category_ID')}" th:text="'Category ID ' + ${err}" />
 									        </ul>
 									 </div>
 							    	<p>Category Name: <input type="text" th:field="*{Category_Name}" /></p>
-							    	<div th:if="${#fields.hasErrors('Category_Name')}">
+							    	<div style="color: red;" th:if="${#fields.hasErrors('Category_Name')}">
 									        <ul>
 									            <li th:each="err : ${#fields.errors('Category_Name')}" th:text="'Category Name ' + ${err}" />
 									        </ul>
 									 </div>
 							    	<p>Description: <input type="text" th:field="*{Description}" /></p>
-							    	<div th:if="${#fields.hasErrors('Description')}">
+							    	<div style="color: red;" th:if="${#fields.hasErrors('Description')}">
 									        <ul>
 									            <li th:each="err : ${#fields.errors('Description')}" th:text="'Description ' + ${err}" />
 									        </ul>
@@ -64,7 +64,7 @@
 												    <option th:value="Inactive" th:text="Inactive"></option>
 												</select>
 									</p>
-									<div th:if="${#fields.hasErrors('Status')}">
+									<div style="color: red;" th:if="${#fields.hasErrors('Status')}">
 									        <ul>
 									            <li th:each="err : ${#fields.errors('Status')}" th:text="'Status ' + ${err}" />
 									        </ul>

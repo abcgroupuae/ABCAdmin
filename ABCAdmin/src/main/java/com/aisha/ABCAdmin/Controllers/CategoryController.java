@@ -52,7 +52,7 @@ public class CategoryController {
 		log.info("saving new category: " + categoryId);
 		if (theBindingResult.hasErrors()) {
             return "categoryadd";
-        }
+        } 
 		log.info("After error checking" + theBindingResult);
 		//System.out.println(newCategory);
 		categoryService.saveCategory(newCategory,session);

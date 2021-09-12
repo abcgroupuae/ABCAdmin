@@ -2,6 +2,8 @@ package com.aisha.ABCAdmin.Controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,8 +65,8 @@ public class SubSubCategoryController {
 		
 	}
 	@PostMapping("/subsubcategory/add")
-	public String postSaveCategory(@ModelAttribute SubSubCategory newSubCategory) {
-		subSubCategoryService.saveSubCategory(newSubCategory);
+	public String postSaveCategory(@ModelAttribute SubSubCategory newSubCategory,HttpSession session) {
+		subSubCategoryService.saveSubCategory(newSubCategory,session);
 		return "redirect:/subsubcategory";
 	}
 	

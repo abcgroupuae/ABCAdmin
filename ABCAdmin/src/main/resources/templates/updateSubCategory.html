@@ -14,8 +14,9 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-        
-   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.6.0.js"
+		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+   		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body class="sb-nav-fixed">
@@ -40,10 +41,10 @@
                             <div class="card-body">
                             
                            
-							    <form action="#" th:action="@{/subcategory/add}" th:object="${selSubCategory}" method="post">
+							    <form name="subcatform" id="subcatform" action="#" th:action="@{/subcategory/add}" th:object="${selSubCategory}" method="post">
 							     <input type="hidden" th:field="*{FromValue}" th:value="Update"/>
 							     <input type="hidden" th:field="*{created_at}" th:value="${selSubCategory.created_at}"/>
-							    	<p>Category Id: <select th:field="*{subCategoryIdentity.Category_ID}">
+							    	<p>Category Id: <select th:field="*{subCategoryIdentity.Category_ID}" id="Category_ID">
 										<option th:each="category : ${AllCategories}"
 										 th:value="${category.Category_ID}"
 										  th:text="${category.Category_Name}"
@@ -52,15 +53,40 @@
 										</option>
 										</select>
 									</p>
-							    	<p>Sub Category Id: <input type="text" th:field="*{subCategoryIdentity.Sub_Category_ID}" /></p>
-							    	<p>Category Name: <input type="text" th:field="*{Sub_Category_Name}" /></p>
-							    	<p>Description: <input type="text" th:field="*{Description}" /></p>
-							        <p>Status : <select th:field="*{Status}">
+									<div id="catid" style="color: red; display:none">
+										<ul>
+											<li> Please select category</li>
+										</ul>
+									</div>
+							    	<p>Sub Category Id: <input type="text" th:field="*{subCategoryIdentity.Sub_Category_ID}" id="Sub_Category_ID" /></p>
+							    	<div id="subcatid" style="color: red;display:none">
+										<ul>
+											<li> Please fill subcategory id</li>
+										</ul>
+									</div>
+							    	<p>Category Name: <input type="text" th:field="*{Sub_Category_Name}" id="Sub_Category_Name" /></p>
+							    	<div id="subcatname" style="color: red;display:none">
+										<ul>
+											<li> Category name is required</li>
+										</ul>
+									</div>
+							    	<p>Description: <input type="text" th:field="*{Description}" id="Description"/></p>
+							    	<div id="description" style="color: red;display:none">
+										<ul>
+											<li> Description is required</li>
+										</ul>
+								    </div>
+							        <p>Status : <select th:field="*{Status}" id="Status">
 												    <option th:value="Active" th:text="Active"></option>
 												    <option th:value="Inactive" th:text="Inactive"></option>
 												</select>
 									</p>
-							        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+									<div id="status" style="color: red;display:none;">
+									<ul>
+										<li> Status is required</li>
+									</ul>
+								</div>
+							        <p><input type="button" value="Submit" id="formsubmit" /> <input type="reset" value="Reset" /></p>
 							    </form>
                                
                             </div>
@@ -78,5 +104,57 @@
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
+        <script>
+		jQuery(document).ready(function () {
+
+			$("#formsubmit").on('click', function () {
+				var isValidated = true;
+				if (!$('#Category_ID').val()) {
+					$('#catid').show();
+					isValidated = false;
+				}else{
+					$('#catid').hide();
+				}
+				if (!$('#Sub_Category_ID').val()) {
+					$('#subcatid').show();
+					isValidated = false;
+				}else{
+					$('#subcatid').hide();
+				}
+				if (!$('#Sub_Category_Name').val()) {
+					$('#subcatname').show();
+					isValidated = false;
+				}else{
+					$('#subcatname').hide();
+				}
+				if (!$('#Description').val()) {
+					$('#description').show();
+					isValidated = false;
+				}else{
+					$('#description').hide();
+				}
+				if (!$('#Description').val()) {
+					$('#description').show();
+					isValidated = false;
+				}else{
+					$('#description').hide();
+				}
+				if (!$('#Status').val()) {
+					$('#status').show();
+					isValidated = false;
+				}else{
+					$('#status').hide();
+				}
+				if(isValidated){
+					$("#subcatform").submit();
+				}
+				
+
+			});
+
+
+
+		});
+		</script>
     </body>
 </html>

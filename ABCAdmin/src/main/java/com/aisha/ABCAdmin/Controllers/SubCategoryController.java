@@ -49,8 +49,9 @@ public class SubCategoryController {
 	@PostMapping("/subcategory/add")
 	public String postSaveCategory(@Valid @ModelAttribute SubCategory newSubCategory, BindingResult theBindingResult, Model model, HttpSession session) {
 		String categoryName = newSubCategory.getSub_Category_Name();
-		log.info("saving new category: " + categoryName);
+		log.info("saving new category: " + categoryName); 
 		if (theBindingResult.hasErrors()) {
+			model.addAttribute("AllCategories", categoryService.getAllCategories());
             return "addSubcategory";
         }
 		log.info("After error checking" + theBindingResult);

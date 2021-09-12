@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 
@@ -17,9 +18,13 @@ public class SubCategoryIdentity implements Serializable {
 	private static final long serialVersionUID = -9144073304539267435L;
 	
 	@NotNull(message=" is required")
+	@NotBlank(message = " is required and should not be blank")
+	@NotEmpty(message=" is required")
 	public String Category_ID;
 	
 	@NotNull(message=" is required")
+	@NotBlank(message = " is required and should not be blank")
+	@NotEmpty(message=" is required")
 	public String Sub_Category_ID;
 	
 	public String getCategory_ID() {

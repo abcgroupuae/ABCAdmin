@@ -46,7 +46,7 @@ public class SubCategoryService {
 				newSubCategory.setCreated_at(existingCategory.getCreated_at());
 				newSubCategory.setCreated_by( existingCategory.getCreated_by());
 			}
-		return subCategoryRepository.saveAndFlush(newSubCategory);
+		return subCategoryRepository.save(newSubCategory);
 	}
 	public void deleteSubCategory(String CatId, String Subcatid) {
 		subCategoryRepository.deleteById(new SubCategoryIdentity(CatId, Subcatid));

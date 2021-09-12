@@ -23,6 +23,7 @@ public class SubSubCategory {
 	 private LocalDateTime created_at;
 	 private String updated_by;
 	 private String created_by;
+	
 	/**
 	 * @return the subSubCategoryIdentity
 	 */

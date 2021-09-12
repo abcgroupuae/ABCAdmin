@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aisha.ABCAdmin.Entity.SubCategory;
 import com.aisha.ABCAdmin.Entity.SubSubCategory;
 import com.aisha.ABCAdmin.Entity.SubSubCategoryIdentity;
 import com.aisha.ABCAdmin.Repository.SubSubCategoryRepository;
@@ -28,16 +31,18 @@ public class SubSubCategoryService {
 		return subSubCategoryRepository.findById( new SubSubCategoryIdentity(catid, subcatid, subsubcatid));
 	}
 
-	public SubSubCategory saveSubCategory(SubSubCategory newSubCategory) {
-		if(newSubCategory.getFromValue().equalsIgnoreCase("Add")) {
-			newSubCategory.setCreated_at(LocalDateTime.now());
-			newSubCategory.setUpdated_at(LocalDateTime.now());
+	public SubSubCategory saveSubCategory(SubSubCategory newSubCategory,HttpSession session) {
+		newSubCategory.setUpdated_at(LocalDateTime.now());
+		newSubCategory.setUpdated_by(session.getAttribute("userId").toString());
+		if(!subSubCategoryRepository.findById(newSubCategory.getSubSubCategoryIdentity()).isPresent()) {
+			 newSubCategory.setCreated_at(LocalDateTime.now());
+			 newSubCategory.setCreated_by(session.getAttribute("userId").toString());
 		}else {
-			newSubCategory.setUpdated_at(LocalDateTime.now());
-			if(!subSubCategoryRepository.findById(newSubCategory.getSubSubCategoryIdentity()).isPresent());
-			   newSubCategory.setCreated_at(LocalDateTime.now());
+			SubSubCategory existingCategory = subSubCategoryRepository.findById(newSubCategory.getSubSubCategoryIdentity()).get();
+			newSubCategory.setCreated_at(existingCategory.getCreated_at());
+			newSubCategory.setCreated_by( existingCategory.getCreated_by());
 		}
-		return subSubCategoryRepository.saveAndFlush(newSubCategory);
+		return subSubCategoryRepository.save(newSubCategory);
 		
 	}
 	public void deleteSubSubCategory(String catid, String subcatid, String subsubcatid) {

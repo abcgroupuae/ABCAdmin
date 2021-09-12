@@ -19,8 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Entity
 @Table(name="sub_categories")
 public class SubCategory {
-	@Valid
+	
 	@EmbeddedId
+	@Valid
 	SubCategoryIdentity subCategoryIdentity;
 	
     
