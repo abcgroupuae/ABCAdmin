@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.abcgroupuae.com" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns="http://www.abcgroupuae.com" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 	<meta charset="utf-8" />
@@ -40,22 +41,44 @@
 							Sub Sub Categories
 						</div>
 						<div class="card-body">
-							<form action="#" th:action="@{/products/add}" th:object="${ProductItem}" method="post" enctype="multipart/form-data">
-							<input type="hidden" th:field="*{FromValue}" th:value="Add"/>
+							<form id="productform" name="productform" action="#" th:action="@{/products/add}"
+								th:object="${ProductItem}" method="post" enctype="multipart/form-data">
+								<input type="hidden" th:field="*{FromValue}" th:value="Add" />
 								<fieldset>
 									<legend>General Product Details</legend>
 									<table>
 										<tr>
 											<td class="ml-3  col-4">Product Id</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Product_id}" /></td>
+											<td class="ml-3  col-4"><input type="text" th:field="*{Product_id}"
+													id="productid" />
+												<div id="productider" style="color: red; display:none">
+													<ul>
+														<li> Product id is required</li>
+													</ul>
+												</div>
+											</td>
 											<td class="ml-3  col-4">Product Name</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Product_name}" />
+											<td class="ml-3  col-4"><input type="text" th:field="*{Product_name}"
+													id="productname" />
+												<div id="productnameer" style="color: red; display:none">
+													<ul>
+														<li> Product name is required</li>
+													</ul>
+												</div>
 											</td>
 
 										</tr>
 										<tr>
 											<td class="ml-3  col-4">Barcode</td>
-											<td class="ml-3  col-4"><input type="number" th:field="*{Barcode}" /></td>
+											<td class="ml-3  col-4"><input type="number" th:field="*{Barcode}"
+													id="barcode" />
+												<div id="barcodeer" style="color: red; display:none">
+													<ul>
+														<li> Barcode is required</li>
+													</ul>
+												</div>
+
+											</td>
 											<td class="ml-3  col-4">Family code</td>
 											<td class="ml-3  col-4"><input type="text" th:field="*{FamilyCode}" /></td>
 										</tr>
@@ -69,12 +92,23 @@
 														th:text="${category.Category_Name}">
 													</option>
 												</select>
+												<div id="categoryer" style="color: red; display:none">
+													<ul>
+														<li>Select a category</li>
+													</ul>
+												</div>
 											</td>
 											<td class="ml-3  col-4">Sub Category</td>
 											<td class="ml-3  col-4"><select id="subcategory"
 													th:field="*{Sub_Category_ID}">
 													<option value="">---Select---</option>
-												</select></td>
+												</select>
+												<div id="subcategoryer" style="color: red; display:none">
+													<ul>
+														<li>Select a category</li>
+													</ul>
+												</div>
+											</td>
 
 										</tr>
 										<tr>
@@ -84,12 +118,25 @@
 													<option value="">---Select---</option>
 												</select></td>
 											<td class="ml-3  col-4">Brand</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Brand}" /></td>
+											<td class="ml-3  col-4"><input type="text" th:field="*{Brand}" id="brand" />
+												<div id="brander" style="color: red; display:none">
+													<ul>
+														<li>Brand is required</li>
+													</ul>
+												</div>
+											</td>
 
 										</tr>
 										<tr>
 											<td class="ml-3  col-4">Description</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Description}" /></td>
+											<td class="ml-3  col-4"><input type="text" th:field="*{Description}"
+													id="description" />
+												<div id="descriptioner" style="color: red; display:none">
+													<ul>
+														<li>Description is required</li>
+													</ul>
+												</div>
+											</td>
 											<td class="ml-3  col-4">Long Description</td>
 											<td class="ml-3  col-4"><textarea th:field="*{Long_description}" /></td>
 
@@ -103,39 +150,75 @@
 									<table>
 										<tr>
 											<td class="ml-3  col-4">Finish</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Finish}" /></td>
+											<td class="ml-3  col-4"><input type="text" th:field="*{Finish}"
+													id="finish" />
+												<div id="finisher" style="color: red; display:none">
+													<ul>
+														<li>Finish is required</li>
+													</ul>
+												</div>
+											</td>
 											<td class="ml-3  col-4">Materials</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Material}" />
+											<td class="ml-3  col-4"><input type="text" th:field="*{Material}"
+													id="material" />
+												<div id="materialer" style="color: red; display:none">
+													<ul>
+														<li>Material is required</li>
+													</ul>
+												</div>
 											</td>
 
 										</tr>
 										<tr>
 											<td class="ml-3  col-4">Shape</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Shape}" /></td>
+											<td class="ml-3  col-4"><input type="text" th:field="*{Shape}" id="shape" />
+												<div id="shapeer" style="color: red; display:none">
+													<ul>
+														<li>Shape is required</li>
+													</ul>
+												</div>
+											</td>
 											<td class="ml-3  col-4">Colour</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Colour}" /></td>
+											<td class="ml-3  col-4"><input type="text" th:field="*{Colour}"
+													id="colour" />
+												<div id="colourer" style="color: red; display:none">
+													<ul>
+														<li>Colour is required</li>
+													</ul>
+												</div>
+											</td>
 										</tr>
 										<tr>
 											<td class="ml-3  col-4">Size</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Size}" /></td>
+											<td class="ml-3  col-4"><input type="text" th:field="*{Size}" id="size" />
+												<div id="sizeer" style="color: red; display:none">
+													<ul>
+														<li>Size is required</li>
+													</ul>
+												</div>
+											</td>
 											<td class="ml-3  col-4">Dimension</td>
 											<td class="ml-3  col-4"><input type="text" th:field="*{Dimension}" /></td>
 										</tr>
 										<tr>
 											<td class="ml-3  col-4">Outlet Diameter</td>
-											<td class="ml-3  col-4"><input type="number" th:field="*{Outlet_diameter}" /></td>
+											<td class="ml-3  col-4"><input type="number"
+													th:field="*{Outlet_diameter}" /></td>
 											<td class="ml-3  col-4">Thickness</td>
 											<td class="ml-3  col-4"><input type="text" th:field="*{Thickness}" /></td>
 										</tr>
 										<tr>
 											<td class="ml-3  col-4">Available Colours</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Available_colours}" /></td>
+											<td class="ml-3  col-4"><input type="text"
+													th:field="*{Available_colours}" /></td>
 											<td class="ml-3  col-4">Available Sizes</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Available_sizes}" /></td>
+											<td class="ml-3  col-4"><input type="text" th:field="*{Available_sizes}" />
+											</td>
 										</tr>
 										<tr>
 											<td class="ml-3  col-4">Available Variance</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Available_variance}" /></td>
+											<td class="ml-3  col-4"><input type="text"
+													th:field="*{Available_variance}" /></td>
 											<td class="ml-3  col-4">Application</td>
 											<td class="ml-3  col-4"><input type="text" th:field="*{Application}" /></td>
 										</tr>
@@ -143,7 +226,7 @@
 											<td class="ml-3  col-4">Type</td>
 											<td class="ml-3  col-4"><input type="text" th:field="*{Type}" /></td>
 										</tr>
-										
+
 
 									</table>
 
@@ -153,32 +236,50 @@
 									<table>
 										<tr>
 											<td class="ml-3  col-4">Unit Price</td>
-											<td class="ml-3  col-4"><input type="number" th:field="*{Unit_price}" /></td>
+											<td class="ml-3  col-4"><input type="number" th:field="*{Unit_price}" />
+											</td>
 											<td class="ml-3  col-4">Unit of Measurement</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Unit_of_measurement}" /></td>
+											<td class="ml-3  col-4"><input type="text" th:field="*{Unit_of_measurement}"
+													id="uom" />
+												<div id="uomer" style="color: red; display:none">
+													<ul>
+														<li>Unit of measurement is required</li>
+													</ul>
+												</div>
+											</td>
 										</tr>
 										<tr>
 											<td class="ml-3  col-4">Unit in Stock</td>
-											<td class="ml-3  col-4"><input type="number" th:field="*{Unit_in_stock}" /></td>
+											<td class="ml-3  col-4"><input type="number" th:field="*{Unit_in_stock}"
+													id="uis" />
+												<div id="uiser" style="color: red; display:none">
+													<ul>
+														<li>Unit in Stock is required</li>
+													</ul>
+												</div>
+											</td>
 										</tr>
 
 									</table>
 
 								</fieldset>
-								
+
 								<fieldset>
 									<legend>Image uploading</legend>
-										<table id="uploadtable">
+									<table id="uploadtable">
 										<tr>
 											<td class="ml-3  col-4">Main Image</td>
-											<td class="ml-3  col-4"><input type="file" name="mainproductimage" accept="image/png, image/jpeg,image/jpg"/></td>
+											<td class="ml-3  col-4"><input type="file" name="mainproductimage"
+													accept="image/png, image/jpeg,image/jpg" /></td>
 											<td class="ml-3  col-4">Technical Sheet</td>
-											<td class="ml-3  col-4"><input type="file" name="technicaldiagram" accept="image/png, image/jpeg, image/jpg"/></td>
+											<td class="ml-3  col-4"><input type="file" name="technicaldiagram"
+													accept="image/png, image/jpeg, image/jpg" /></td>
 										</tr>
 										<tr>
-										
+
 											<td class="ml-3  col-4">No:of thumpnail inages</td>
-											<td class="ml-3  col-4"><select id="no_of_thumpnails" name="no_of_thumpnails" >
+											<td class="ml-3  col-4"><select id="no_of_thumpnails"
+													name="no_of_thumpnails">
 													<option value="">---select---</option>
 													<option value="1">1</option>
 													<option value="2">2</option>
@@ -186,12 +287,12 @@
 													<option value="4">4</option>
 													<option value="5">5</option>
 													<option value="6">6</option>
-												</select></td> 
+												</select></td>
 										</tr>
 
 									</table>
 								</fieldset>
-								 <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+								<p><input type="button" value="Submit" id="formsubmit" /> </p>
 							</form>
 						</div>
 					</div>
@@ -211,20 +312,20 @@
 	<script src="js/datatables-simple-demo.js"></script>
 	<script>
 		jQuery(document).ready(function () {
-			
+
 			$("#no_of_thumpnails").on('change', function () {
 				var thumpnailCount = $("#no_of_thumpnails").val();
 				alert(thumpnailCount);
 				if ($('tr.thumpnail').length) {
 					$('tr.thumpnail').remove();
-					}
-				var html='';
-				for(var i=1;i<=thumpnailCount;i++){
-					html +='<tr class="thumpnail"><td class="ml-3  col-4">Thumpnail Image'+i+'</td><td class="ml-3  col-4"><input type="file" name="productthumpnail'+i+'" accept="image/png, image/jpeg,image/jpg"/></td></tr>';
+				}
+				var html = '';
+				for (var i = 1; i <= thumpnailCount; i++) {
+					html += '<tr class="thumpnail"><td class="ml-3  col-4">Thumpnail Image' + i + '</td><td class="ml-3  col-4"><input type="file" name="productthumpnail' + i + '" accept="image/png, image/jpeg,image/jpg"/></td></tr>';
 				}
 				$("#uploadtable").append(html);
 				html.appendTo("#uploadtable");
-				
+
 			});
 
 
@@ -306,6 +407,100 @@
 
 					}
 				});
+			});
+
+
+			$("#formsubmit").on('click', function () {
+				var isValidated = true;
+				if (!$('#productid').val()) {
+					$('#productider').show();
+					isValidated = false;
+				} else {
+					$('#productider').hide();
+				}
+				if (!$('#productname').val()) {
+					$('#productnameer').show();
+					isValidated = false;
+				} else {
+					$('#productnameer').hide();
+				}
+				if (!$('#barcode').val() || $('#barcode').val()==0 ) {
+					$('#barcodeer').show();
+					isValidated = false;
+				} else {
+					$('#barcodeer').hide();
+				}
+				if (!$('#category').val()) {
+					$('#categoryer').show();
+					isValidated = false;
+				} else {
+					$('#categoryer').hide();
+				}
+				if (!$('#subcategory').val()) {
+					$('#subcategoryer').show();
+					isValidated = false;
+				} else {
+					$('#subcategoryer').hide();
+				}
+				if (!$('#brand').val()) {
+					$('#brander').show();
+					isValidated = false;
+				} else {
+					$('#brander').hide();
+				}
+				if (!$('#description').val()) {
+					$('#descriptioner').show();
+					isValidated = false;
+				} else {
+					$('#descriptioner').hide();
+				}
+				if (!$('#finish').val()) {
+					$('#finisher').show();
+					isValidated = false;
+				} else {
+					$('#finisher').hide();
+				}
+				if (!$('#material').val()) {
+					$('#materialer').show();
+					isValidated = false;
+				} else {
+					$('#materialer').hide();
+				}
+				if (!$('#shape').val()) {
+					$('#shapeer').show();
+					isValidated = false;
+				} else {
+					$('#shapeer').hide();
+				}
+				if (!$('#colour').val()) {
+					$('#colourer').show();
+					isValidated = false;
+				} else {
+					$('#colourer').hide();
+				}
+				if (!$('#size').val()) {
+					$('#sizeer').show();
+					isValidated = false;
+				} else {
+					$('#sizeer').hide();
+				}
+				if (!$('#uom').val()) {
+					$('#uomer').show();
+					isValidated = false;
+				} else {
+					$('#uomer').hide();
+				}
+				if (!$('#uis').val() || $('#uis').val()<=0 ) {
+					$('#uiser').show();
+					isValidated = false;
+				} else {
+					$('#uiser').hide();
+				}
+				if (isValidated) {
+					$("#productform").submit();
+				}
+
+
 			});
 		});
 	</script>

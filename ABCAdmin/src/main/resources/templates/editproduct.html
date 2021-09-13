@@ -42,7 +42,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 							Sub Sub Categories
 						</div>
 						<div class="card-body">
-							<form action="#" th:action="@{/products/add}" th:object="${ProductItem}" method="post" enctype="multipart/form-data">
+							<form id="productform" name="productform" action="#" th:action="@{/products/add}" th:object="${ProductItem}" method="post" enctype="multipart/form-data">
 							<input type="hidden" th:field="*{FromValue}"  th:value="Update"/>
 							<input type="hidden" th:field="*{Created_at}" th:value="${ProductItem?.Created_at}"/>
 								<fieldset>
@@ -50,15 +50,31 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 									<table>
 										<tr>
 											<td class="ml-3  col-4">Product Id</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Product_id}" th:value="${ProductItem?.Product_id}" /></td>
+											<td class="ml-3  col-4"><input type="text" th:field="*{Product_id}" th:value="${ProductItem?.Product_id}" id="productid"/>
+											<div id="productider" style="color: red; display:none">
+													<ul>
+														<li> Product id is required</li>
+													</ul>
+												</div></td>
 											<td class="ml-3  col-4">Product Name</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Product_name}" th:value="${ProductItem?.Product_name}"/>
+											<td class="ml-3  col-4"><input type="text" th:field="*{Product_name}" th:value="${ProductItem?.Product_name}" id="productname"/>
+											<div id="productnameer" style="color: red; display:none">
+													<ul>
+														<li> Product name is required</li>
+													</ul>
+												</div>
 											</td>
 
 										</tr>
 										<tr>
 											<td class="ml-3  col-4">Barcode</td>
-											<td class="ml-3  col-4"><input type="number" th:field="*{Barcode}" th:value="${ProductItem?.Barcode}" /></td>
+											<td class="ml-3  col-4"><input type="number" th:field="*{Barcode}" th:value="${ProductItem?.Barcode}" id="barcode" />
+											<div id="barcodeer" style="color: red; display:none">
+													<ul>
+														<li> Barcode is required</li>
+													</ul>
+												</div>
+											</td>
 											<td class="ml-3  col-4">Family code</td>
 											<td class="ml-3  col-4"><input type="text" th:field="*{FamilyCode}" th:value="${ProductItem?.FamilyCode}" /></td>
 										</tr>
@@ -72,6 +88,11 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 														th:text="${category.Category_Name}">
 													</option>
 												</select>
+												<div id="categoryer" style="color: red; display:none">
+													<ul>
+														<li>Select a category</li>
+													</ul>
+												</div>
 											</td>
 											<td class="ml-3  col-4">Sub Category</td>
 											<td class="ml-3  col-4"><select id="subcategory"
@@ -81,7 +102,13 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 														th:value="${subcategory?.SubCategoryIdentity?.Sub_Category_ID}"
 														th:text="${subcategory?.Sub_Category_Name}">
 													</option>
-												</select></td>
+												</select>
+												<div id="subcategoryer" style="color: red; display:none">
+													<ul>
+														<li>Select a category</li>
+													</ul>
+												</div>
+												</td>
 
 										</tr>
 										<tr>
@@ -95,12 +122,24 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 													</option>
 												</select></td>
 											<td class="ml-3  col-4">Brand</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Brand}" th:value="${ProductItem?.Brand}" /></td>
+											<td class="ml-3  col-4"><input type="text" th:field="*{Brand}" th:value="${ProductItem?.Brand}" id="brand" />
+											<div id="brander" style="color: red; display:none">
+													<ul>
+														<li>Brand is required</li>
+													</ul>
+												</div>
+											</td>
 
 										</tr>
 										<tr>
 											<td class="ml-3  col-4">Description</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Description}" th:value="${ProductItem?.Description}" /></td>
+											<td class="ml-3  col-4"><input type="text" th:field="*{Description}" th:value="${ProductItem?.Description}" id="description" />
+											<div id="descriptioner" style="color: red; display:none">
+													<ul>
+														<li>Description is required</li>
+													</ul>
+												</div>
+											</td>
 											<td class="ml-3  col-4">Long Description</td>
 											<td class="ml-3  col-4"><textarea th:field="*{Long_description}" th:value="${ProductItem?.Long_description}" /></td>
 
@@ -114,21 +153,50 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 									<table>
 										<tr>
 											<td class="ml-3  col-4">Finish</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Finish}" th:value="${ProductItem?.Finish}" /></td>
+											<td class="ml-3  col-4"><input type="text" th:field="*{Finish}" th:value="${ProductItem?.Finish}" id="finish" />
+											<div id="finisher" style="color: red; display:none">
+													<ul>
+														<li>Finish is required</li>
+													</ul>
+												</div>
+											</td>
 											<td class="ml-3  col-4">Materials</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Material}" th:value="${ProductItem?.Material}" />
+											<td class="ml-3  col-4"><input type="text" th:field="*{Material}" th:value="${ProductItem?.Material}" id="material"/>
+											<div id="materialer" style="color: red; display:none">
+													<ul>
+														<li>Material is required</li>
+													</ul>
+												</div>
 											</td>
 
 										</tr>
 										<tr>
 											<td class="ml-3  col-4">Shape</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Shape}" th:value="${ProductItem?.Shape}" /></td>
+											<td class="ml-3  col-4"><input type="text" th:field="*{Shape}" th:value="${ProductItem?.Shape}" id="shape" />
+											<div id="shapeer" style="color: red; display:none">
+													<ul>
+														<li>Shape is required</li>
+													</ul>
+												</div>
+											</td>
 											<td class="ml-3  col-4">Colour</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Colour}" th:value="${ProductItem?.Colour}" /></td>
+											<td class="ml-3  col-4"><input type="text" th:field="*{Colour}" th:value="${ProductItem?.Colour}" id="colour" />
+											<div id="colourer" style="color: red; display:none">
+													<ul>
+														<li>Colour is required</li>
+													</ul>
+												</div>
+											</td>
 										</tr>
 										<tr>
 											<td class="ml-3  col-4">Size</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Size}" th:value="${ProductItem?.Size}" /></td>
+											<td class="ml-3  col-4"><input type="text" th:field="*{Size}" th:value="${ProductItem?.Size}" id="size" />
+											<div id="sizeer" style="color: red; display:none">
+													<ul>
+														<li>Size is required</li>
+													</ul>
+												</div>
+											</td>
 											<td class="ml-3  col-4">Dimension</td>
 											<td class="ml-3  col-4"><input type="text" th:field="*{Dimension}" th:value="${ProductItem?.Dimension}" /></td>
 										</tr>
@@ -166,11 +234,23 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 											<td class="ml-3  col-4">Unit Price</td>
 											<td class="ml-3  col-4"><input type="number" th:field="*{Unit_price}" th:value="${ProductItem?.Unit_price}" /></td>
 											<td class="ml-3  col-4">Unit of Measurement</td>
-											<td class="ml-3  col-4"><input type="text" th:field="*{Unit_of_measurement}" th:value="${ProductItem?.Unit_of_measurement}" /></td>
+											<td class="ml-3  col-4"><input type="text" th:field="*{Unit_of_measurement}" th:value="${ProductItem?.Unit_of_measurement}" id="uom"/>
+											<div id="uomer" style="color: red; display:none">
+													<ul>
+														<li>Unit of measurement is required</li>
+													</ul>
+												</div>
+											</td>
 										</tr>
 										<tr>
 											<td class="ml-3  col-4">Unit in Stock</td>
-											<td class="ml-3  col-4"><input type="number" th:field="*{Unit_in_stock}" th:value="${ProductItem?.Unit_in_stock}" /></td>
+											<td class="ml-3  col-4"><input type="number" id="uis" th:field="*{Unit_in_stock}" th:value="${ProductItem?.Unit_in_stock}" />
+											<div id="uiser" style="color: red; display:none">
+													<ul>
+														<li>Unit in Stock is required</li>
+													</ul>
+												</div>
+											</td>
 										</tr>
 
 									</table>
@@ -202,7 +282,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 									</table>
 								</fieldset>
-								 <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+								 <p><input type="button" value="Submit" id="formsubmit" /> </p>
 							</form>
 						</div>
 					</div>
@@ -318,6 +398,100 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 					}
 				});
 			});
+			
+			
+			$("#formsubmit").on('click', function () {
+				var isValidated = true;
+				if (!$('#productid').val()) {
+					$('#productider').show();
+					isValidated = false;
+				} else {
+					$('#productider').hide();
+				}
+				if (!$('#productname').val()) {
+					$('#productnameer').show();
+					isValidated = false;
+				} else {
+					$('#productnameer').hide();
+				}
+				if (!$('#barcode').val() || $('#barcode').val()==0 ) {
+					$('#barcodeer').show();
+					isValidated = false;
+				} else {
+					$('#barcodeer').hide();
+				}
+				if (!$('#category').val()) {
+					$('#categoryer').show();
+					isValidated = false;
+				} else {
+					$('#categoryer').hide();
+				}
+				if (!$('#subcategory').val()) {
+					$('#subcategoryer').show();
+					isValidated = false;
+				} else {
+					$('#subcategoryer').hide();
+				}
+				if (!$('#brand').val()) {
+					$('#brander').show();
+					isValidated = false;
+				} else {
+					$('#brander').hide();
+				}
+				if (!$('#description').val()) {
+					$('#descriptioner').show();
+					isValidated = false;
+				} else {
+					$('#descriptioner').hide();
+				}
+				if (!$('#finish').val()) {
+					$('#finisher').show();
+					isValidated = false;
+				} else {
+					$('#finisher').hide();
+				}
+				if (!$('#material').val()) {
+					$('#materialer').show();
+					isValidated = false;
+				} else {
+					$('#materialer').hide();
+				}
+				if (!$('#shape').val()) {
+					$('#shapeer').show();
+					isValidated = false;
+				} else {
+					$('#shapeer').hide();
+				}
+				if (!$('#colour').val()) {
+					$('#colourer').show();
+					isValidated = false;
+				} else {
+					$('#colourer').hide();
+				}
+				if (!$('#size').val()) {
+					$('#sizeer').show();
+					isValidated = false;
+				} else {
+					$('#sizeer').hide();
+				}
+				if (!$('#uom').val()) {
+					$('#uomer').show();
+					isValidated = false;
+				} else {
+					$('#uomer').hide();
+				}
+				if (!$('#uis').val() || $('#uis').val()<=0 ) {
+					$('#uiser').show();
+					isValidated = false;
+				} else {
+					$('#uiser').hide();
+				}
+				if (isValidated) {
+					$("#productform").submit();
+				}
+
+
+			}) ;
 		});
 	</script>
 </body>

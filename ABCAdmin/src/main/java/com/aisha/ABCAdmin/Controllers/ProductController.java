@@ -1,6 +1,7 @@
 package com.aisha.ABCAdmin.Controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,10 +13,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.aisha.ABCAdmin.Entity.Product;
+import com.aisha.ABCAdmin.GenericClasses.OdooClient;
 import com.aisha.ABCAdmin.Handlers.FileUploadUtil;
 import com.aisha.ABCAdmin.Services.CategoryService;
 import com.aisha.ABCAdmin.Services.ProductService;
@@ -198,5 +202,11 @@ public class ProductController {
 			System.out.println(ex.getMessage());
 		}
 		return "redirect:/products";
+	}
+	
+	@GetMapping("/odoo/{barcode}")
+	@ResponseBody
+	public List<Object> getOdooDetails(@PathVariable("barcode") int barcode){
+		return OdooClient.OdooValuesFetching(barcode);
 	}
 }
