@@ -204,9 +204,9 @@ public class ProductController {
 		return "redirect:/products";
 	}
 	
-	@GetMapping("/odoo/{barcode}")
+	@GetMapping("/odoo/getDetail")
 	@ResponseBody
-	public List<Object> getOdooDetails(@PathVariable("barcode") int barcode){
+	public List<Object> getOdooDetails(@RequestParam(name ="barcode") int barcode){
 		return OdooClient.OdooValuesFetching(barcode);
 	}
 }

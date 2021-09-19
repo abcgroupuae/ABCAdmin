@@ -10,7 +10,7 @@ var dates1 = dates.split(",");
 for(i=0;i<dates.length;i++)
 {
 	var mySQLDate = dates[i];
-    data.push(new Date(Date.parse(mySQLDate.replace(/-/g, '/'))).toLocaleString('DD-MMM')) ;
+    data.push(new Date(Date.parse(mySQLDate.replace(/-/g, '/'))).toLocaleString(window.navigator.language,'DD-MMM')) ;
 }
 var count = document.getElementById("count").value;
 console.log(count);
@@ -68,3 +68,33 @@ var myLineChart = new Chart(ctx, {
     }
   }
 });
+
+//amChart model
+var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+// Add data
+chart.data = [{
+  "date": new Date(2018, 3, 20),
+  "value": 90
+}, {
+  "date": new Date(2018, 3, 21),
+  "value": 102
+}, {
+  "date": new Date(2018, 3, 22),
+  "value": 65
+}];
+
+// Create axes
+var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+
+// Set date label formatting
+dateAxis.dateFormats.setKey("day", "MMMM dt");
+
+// Create value axis
+var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+// Create series
+var series = chart.series.push(new am4charts.ColumnSeries());
+series.dataFields.valueY = "value";
+series.dataFields.dateX = "date";
+series.name = "Sales";

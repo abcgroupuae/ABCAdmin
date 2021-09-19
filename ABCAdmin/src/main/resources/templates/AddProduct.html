@@ -44,6 +44,13 @@
 							<form id="productform" name="productform" action="#" th:action="@{/products/add}"
 								th:object="${ProductItem}" method="post" enctype="multipart/form-data">
 								<input type="hidden" th:field="*{FromValue}" th:value="Add" />
+								<fieldset id="odoo_details " >
+								<legend>Odoo Details</legend>
+								<table id= "odootable">
+								
+								</table>
+								
+								</fieldset>
 								<fieldset>
 									<legend>General Product Details</legend>
 									<table>
@@ -251,7 +258,7 @@
 										<tr>
 											<td class="ml-3  col-4">Unit in Stock</td>
 											<td class="ml-3  col-4"><input type="number" th:field="*{Unit_in_stock}"
-													id="uis" />
+													id="uis" disabled />
 												<div id="uiser" style="color: red; display:none">
 													<ul>
 														<li>Unit in Stock is required</li>
@@ -408,6 +415,55 @@
 					}
 				});
 			});
+			
+			$("#barcode").on('change', function () {
+				var barcode = $("#barcode").val();
+				var selectedSubItem = $(this).val();
+				var selSubCategories = $("#subsubcategory"); // will be update after success ajax call
+				// var _token= $('meta[name="csrf-token"]').attr('content');
+				// alert(selectedItem + "csrf token"+_token);
+				$.ajax({     // get states/towns from db from controller
+					cache: false,
+					type: "GET",
+					// url: "@(Url.RouteUrl('/getSubCategories'))", 
+					url: "/odoo/getDetail",
+					data: {"barcode": barcode},
+					success: function (data) {
+						$('#odoo_details').show();
+						console.log(data);
+						if(data!=null && data.length>0){
+							$('#odootable tr').each(function(index) {
+     											 //alert(index);
+     										 $(this).remove();
+  							  });
+							var markup = "<tr style='color:blue'> <td>Product Name: " + data[0].name + "</td></tr><tr style='color:blue'> <td>Product Id :-" + data[0].default_code + "</td></tr><tr style='color:blue'><td>Stock:-  "+ data[0].forecasted_qty +"</td></tr><tr style='color:blue'><td> Other Details :-"+data[0].product_brand_id[1]+"</td></tr> ";
+							console.log(markup);
+							$("#odootable").append(markup);
+							$('#uis').val(data[0].forecasted_qty);
+						}else{
+							$('#odoo_details').hide();
+							$("#odootable").html('');
+							$('#odootable tr').each(function(index) {
+     											 //alert(index);
+     										 $(this).remove();
+  							  });
+						}
+						
+						
+            
+						
+
+					},
+					error: function (xhr, ajaxOptions, thrownError) {
+						alert('Failed to retrieve states.');
+							$('#odoo_details').hide();
+							$('#odootable tr').each(function(index) {
+     											 //alert(index);
+     										 $(this).remove();
+  							  });
+					}
+				});
+			});
 
 
 			$("#formsubmit").on('click', function () {
@@ -500,8 +556,8 @@
 					$("#productform").submit();
 				}
 
-
 			});
+			
 		});
 	</script>
 </body>
