@@ -43,54 +43,7 @@
 					</div>
 					<div th:replace="fragments/cards :: cards">...</div>
 					<div th:replace="fragments/chartArea :: chartArea">...</div>
-					<div class="card mb-4">
-						<div class="card-header">
-							<i class="fas fa-table me-1"></i>
-							DataTable Example
-						</div>
-						<div class="card-body">
-							<div th:each="whatsappclick : ${whatsappclick}">
-								Subject:
-								<h4 th:text="${whatsappclick}" />
-								Subject Grade Goal: <h4 th:text="${#dates.format(whatsappclick, 'dd-MMM')}" />
-    <!-- Other Properties -->
-</div>
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                       
-                                        <tr>
-                                            <td>Cara Stevens</td>
-                                            <td>Sales Assistant</td>
-                                            <td>New York</td>
-                                            <td>46</td>
-                                            <td>2011/12/06</td>
-                                            <td>$145,600</td>
-                                        </tr>
-                                       
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+					
                     </div>
                 </main>
               <div th:replace="fragments/footer :: footer">...</div>

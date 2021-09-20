@@ -26,12 +26,12 @@ public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
     public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
 
         pattern = Pattern.compile(EMAIL_PATTERN);
-        log.info("the imail validation pattern " + pattern);
+        log.info("the email validation pattern " + pattern);
         if (email == null) {
             return false;
         }
         theMatcher = pattern.matcher(email);
-        log.info("the imail validation: " + theMatcher.matches());
+        log.info("the email validation: " + theMatcher.matches());
         return theMatcher.matches();
 
 

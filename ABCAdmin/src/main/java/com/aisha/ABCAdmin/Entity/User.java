@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonIdentityReference(alwaysAsId=true)
 @FieldMatch.List({
     @FieldMatch(first = "inputpassword", second = "matchingPassword", message = "The password fields must match")
-})
+}) 
 @Entity
 @Table(name="users")
 public class User implements Serializable {

@@ -40,7 +40,7 @@ public class UserService {
 	}
 	
 	public List<User> getAllUserRequest(){
-		return userRepository.findAll().stream().filter(t->t.getStatus()==5).collect(Collectors.toList());
+		return userRepository.findAll().stream().filter(t->t.getStatus()==3).collect(Collectors.toList());
 		
 	}
 	
@@ -75,14 +75,16 @@ public class UserService {
     }
     @Transactional
     @Modifying
-    public void approveRequest(User user) {
-        user.setStatus(2);
+    public void updateRequest(User user, int statuscode) {
+        user.setStatus(statuscode);
+        user.setInputpassword("password");
+        user.setMatchingPassword("password");
         user.setApproved_date(LocalDateTime.now());
         int done =UserRolesRepository.deleteRequestorRoleOnceApproved(user.getUser_id());
         System.out.println(done);
         User_Roles userRole = new User_Roles();
         userRole.setUser_id(user.getUser_id());
-        userRole.setRole_id(2);
+        userRole.setRole_id(statuscode);
         User_Roles User_Roles = UserRolesRepository.save(userRole);
         System.out.println(User_Roles);
         userRepository.save(user);
@@ -90,7 +92,9 @@ public class UserService {
     public List<User> gettingAllApprovedAdmins(){
     	return userRepository.findAllBystatus(2);
     }
-    
+    public List<User> gettingAllBlockedAdmins(){
+    	return userRepository.findAllBystatus(4);
+    }
     public User FindByEmail(String email) {
     	return userRepository.findByEmail(email);
     }

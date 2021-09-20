@@ -42,7 +42,7 @@ public class UserManagementController {
 			User user = new User();
 			if(UserService.findByUserId(user_id).isPresent())
 				user = UserService.findByUserId(user_id).get();
-			UserService.approveRequest(user);
+			UserService.updateRequest(user , 2);
 			
 		}catch(Exception ex) {
 			System.out.println(ex.getMessage());
@@ -50,12 +50,58 @@ public class UserManagementController {
 		
 		return "redirect:/user_request";
 	}
+	@GetMapping("/user_request/reject/{user_id}")
+	public String RejectUser(@PathVariable("user_id") int user_id, Model model) {
+		try {
+			User user = new User();
+			if(UserService.findByUserId(user_id).isPresent())
+				user = UserService.findByUserId(user_id).get();
+			UserService.updateRequest(user,5);
+			
+		}catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		
+		return "redirect:/user_request";
+	}
+	@GetMapping("/admin/block/{user_id}")
+	public String BlockAdmin(@PathVariable("user_id") int user_id, Model model) {
+		try {
+			User user = new User();
+			if(UserService.findByUserId(user_id).isPresent())
+				user = UserService.findByUserId(user_id).get();
+			UserService.updateRequest(user,4);
+			
+		}catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		
+		return "redirect:/users/admin";
+	}
+	@GetMapping("/admin/unblock/{user_id}")
+	public String UnBlockAdmin(@PathVariable("user_id") int user_id, Model model) {
+		try {
+			User user = new User();
+			if(UserService.findByUserId(user_id).isPresent())
+				user = UserService.findByUserId(user_id).get();
+			UserService.updateRequest(user,2);
+			
+		}catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		
+		return "redirect:/users/admin-blocked";
+	}
 	@GetMapping("/users/admin")
 	public String getAdminList(Model model){
 		model.addAttribute("adminList", UserService.gettingAllApprovedAdmins());
 		return "Adminlist";
 	}
-	
+	@GetMapping("/users/admin-blocked")
+	public String getBlockedList(Model model){
+		model.addAttribute("adminList", UserService.gettingAllBlockedAdmins());
+		return "Adminblocklist";
+	}
 	@GetMapping("/admin/delete/{user_id}")
 	@Transactional
 	@Modifying

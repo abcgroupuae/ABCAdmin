@@ -57,7 +57,23 @@ public class ProductController {
 		model.addAttribute("Products", productService.getAllProducts());
 		return "Products";
 	}
-
+//	@GetMapping("/products/enquiries")
+//	public String ViewProductEnquiries(Model model) {
+//
+//		productService.getAllProducts().stream().forEach(t -> {
+//			if (categoryService.findByCategoryId(t.getCategory_ID()).isPresent())
+//				t.setCategoryDetails(categoryService.findByCategoryId(t.getCategory_ID()).get());
+//			if (subCategoryService.findBySubCategoryIdentity(t.getCategory_ID(), t.getSub_Category_ID()).isPresent())
+//				t.setSubCategoryDetails(
+//						subCategoryService.findBySubCategoryIdentity(t.getCategory_ID(), t.getSub_Category_ID()).get());
+//			if (subSubCategoryService.findBySubSubCategoryIdentity(t.getCategory_ID(), t.getSub_Category_ID(),
+//					t.getSub_Sub_Category_ID()).isPresent())
+//				t.setSubSubCategoryDetails(subSubCategoryService.findBySubSubCategoryIdentity(t.getCategory_ID(),
+//						t.getSub_Category_ID(), t.getSub_Sub_Category_ID()).get());
+//		});
+//		model.addAttribute("Products", productService.getAllProducts());
+//		return "Products";
+//	}
 	@GetMapping("/products/add")
 	public String redirectToAddProductPage(Model model) {
 		model.addAttribute("ProductItem", new Product());

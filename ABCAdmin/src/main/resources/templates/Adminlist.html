@@ -68,7 +68,7 @@
 								             <td><span th:text="${request.mobileNumber}"> Mobile Number </span></td>
 								            <td><span th:text="${#dates.format(new java.util.Date(request.approved_date), 'dd-MMM-yyyy')}"> Approved Date </span></td>
 								            <td colspan="2">
-								            <a sec:authorize="hasAuthority('ADMIN_MANAGER')" th:href="@{/admin/delete/{user_id}(user_id = ${request.user_id})}" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</a>
+								            <a sec:authorize="hasAuthority('ADMIN_MANAGER')" th:href="@{/admin/block/{user_id}(user_id = ${request.user_id})}" class="btn btn-danger"><i class="fa fa-trash"></i>Block</a>
 								            <a sec:authorize="hasAuthority('ADMIN_MANAGER')" th:href="@{/user_request/reset_password/{user_id}(user_id = ${request.user_id})}" class="btn btn-secondary" type="button"><i class="material-icons"></i>Reset Password</a>
 								            </td>
 								        </tr>
