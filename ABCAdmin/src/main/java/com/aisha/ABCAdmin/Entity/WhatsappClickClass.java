@@ -1,22 +1,30 @@
 package com.aisha.ABCAdmin.Entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="whatsapp_click_count")
 public class WhatsappClickClass {
+	
+	@Transient
+	LocalDate fromdate;
+	@Transient
+	LocalDate todate;
+	
 	@Id
 	@Column(name="sl_no")
 	private int slno;
 	@Column(name="count")
 	private int count;
 	@Column(name="date")
-	private Date clickdate;
+	private LocalDate clickdate;
 	public int getSlno() {
 		return slno;
 	}
@@ -29,13 +37,26 @@ public class WhatsappClickClass {
 	public void setCount(int count) {
 		this.count = count;
 	}
-	public Date getClickdate() {
+	public LocalDate getClickdate() {
 		return clickdate;
 	}
-	public void setClickdate(Date clickdate) {
+	public void setClickdate(LocalDate clickdate) {
 		this.clickdate = clickdate;
 	}
-	public WhatsappClickClass(int slno, int count, Date clickdate) {
+	
+	public LocalDate getFromdate() {
+		return fromdate;
+	}
+	public void setFromdate(LocalDate fromdate) {
+		this.fromdate = fromdate;
+	}
+	public LocalDate getTodate() {
+		return todate;
+	}
+	public void setTodate(LocalDate todate) {
+		this.todate = todate;
+	}
+	public WhatsappClickClass(int slno, int count, LocalDate clickdate) {
 		super();
 		this.slno = slno;
 		this.count = count;

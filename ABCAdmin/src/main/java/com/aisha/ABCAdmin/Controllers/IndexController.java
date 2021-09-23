@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.aisha.ABCAdmin.Entity.User;
+import com.aisha.ABCAdmin.Entity.WhatsappClickClass;
 import com.aisha.ABCAdmin.GenericClasses.MyUserPrincipal;
 import com.aisha.ABCAdmin.Handlers.ActiveUserStore;
 import com.aisha.ABCAdmin.Services.GenericService;
@@ -61,6 +62,7 @@ public class IndexController {
 	@RequestMapping("/dashboard")
 	public String redirectToDashboard(Model model) {
 		model.addAttribute("users", activeUserStore.getUsers());
+		model.addAttribute("whatsappClickClass", new WhatsappClickClass());
 		model.addAttribute("whatsappclick", genericService.getAllWhatsappClicks().stream().map(obj->obj.getClickdate()).collect(Collectors.toList()));
 		model.addAttribute("whatsappclickcount", genericService.getAllWhatsappClicks().stream().map(obj->obj.getCount()).collect(Collectors.toList()));
 		return "index";

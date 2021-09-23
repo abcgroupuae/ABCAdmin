@@ -1,44 +1,5 @@
-<div class="row" th:fragment="chartArea">
-	
-	<div class="card col-xl-12">
-		<div class=" mb-4">
-			<div class="card-header">
-				<i class="fas fa-chart-bar me-1"></i>
-				Bar Chart Example
-			</div>
-			<div class="container">
-				<form method="post" th:object="${whatsappClickClass}" th:action="@{/whatsapp/click-count}">
-					<div class="form-group row">
-						<div class="col-md-4 mt-5">
-							<label for="fromdate">From</label>
-							<div class="input-group date">
-								<input type="text" class="form-control" id="fromdate" autocomplete="off"
-									th:field="*{fromdate}" />
-								<div class="input-group-append">
-									<span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 mt-5">
-							<label for="todate">To</label>
-							<div class="input-group date">
-								<input type="text" class="form-control" id="todate" autocomplete="off"
-									th:field="*{fromdate}" />
-								<div class="input-group-append">
-									<span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-								</div>
-							</div>
-						</div>
-					</div>
 
-					<button class="btn btn-primary" type="submit">Submit form</button>
-				</form>
-
-			</div>
- 
-			
-		</div>
-		<link rel="stylesheet"
+  <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/cdbootstrap@1.0.0/css/bootstrap.min.css"/>
   <link
     rel="stylesheet"
@@ -54,8 +15,8 @@
   <title>How to create bootstrap charts using bootstrap 5 and Contrast</title>
   <style>
   .chart-container {
-    width: 95%;
-    height: 70%;
+    width: 50%;
+    height: 50%;
     margin: auto;
   }
 </style>
@@ -75,12 +36,6 @@
 
 			var dates = $('#dates').val();
 			var counts = $('#count').val();
-		//	var data =[];
-//			for(i=0;i<dates.length;i++)
-//{
-//	var mySQLDate = dates[i];
-//    data.push(new Date(Date.parse(mySQLDate).toLocaleString(window.navigator.language,'DD-MMM'))) ;
-//}
 			var labelArray = dates.split(",");
 			var countArray = counts.split(",");
 			const ctx = document.getElementById("chart").getContext('2d');
@@ -89,7 +44,7 @@
 				data: {
 					labels: labelArray,
 					datasets: [{
-						label: 'whatsapp Click count',
+						label: 'food Items',
 						backgroundColor: 'rgba(161, 198, 247, 1)',
 						borderColor: 'rgb(47, 128, 237)',
 						data: countArray,
@@ -110,5 +65,3 @@
 			
 		});
 	</script>
-	</div>
-</div>
